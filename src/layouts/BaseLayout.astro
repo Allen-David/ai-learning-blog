@@ -1,0 +1,47 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "一个使用 Astro 构建的静态博客" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <nav aria-label="主导航">
+        <a class="brand" href="/">AI 学习手记<span>.</span></a>
+        <a class="nav-link" href="/#articles">文章</a>
+      </nav>
+    </header>
+    <main><slot /></main>
+    <footer>使用 Astro 构建</footer>
+  </body>
+</html>
+
+<style is:global>
+  :root { color: #e2e8f0; background: #0a0a0f; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { min-width: 320px; margin: 0; line-height: 1.7; background: #0a0a0f; }
+  body::before { position: fixed; z-index: -1; inset: 0; background: radial-gradient(circle at 15% -10%, rgba(99, 102, 241, .22), transparent 34rem), radial-gradient(circle at 90% 16%, rgba(6, 182, 212, .12), transparent 26rem); content: ""; pointer-events: none; }
+  header { position: sticky; z-index: 10; top: 0; border-bottom: 1px solid rgba(255, 255, 255, .06); background: rgba(10, 10, 15, .78); backdrop-filter: blur(16px); }
+  nav, main, footer { width: min(1040px, calc(100% - 2rem)); margin: 0 auto; }
+  nav { min-height: 68px; display: flex; align-items: center; justify-content: space-between; }
+  a { color: #67e8f9; }
+  .brand { color: #f8fafc; font-weight: 750; letter-spacing: -.03em; text-decoration: none; }
+  .brand span { color: #22d3ee; }
+  .nav-link { color: #cbd5e1; font-size: .92rem; text-decoration: none; }
+  .nav-link:hover { color: #fff; }
+  main { padding: 4rem 0 5rem; }
+  footer { padding: 2rem 0 3rem; color: #64748b; font-size: .9rem; border-top: 1px solid rgba(255, 255, 255, .06); }
+  ::selection { color: #fff; background: #6366f1; }
+</style>

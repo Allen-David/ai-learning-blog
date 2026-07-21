@@ -1,0 +1,46 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={`${post.data.title} | 我的博客`} description={post.data.description}>
+  <article>
+    <a class="back" href="/">← 返回文章列表</a>
+    <header class="post-header">
+      <time datetime={post.data.pubDate.toISOString()}>
+        {post.data.pubDate.toLocaleDateString("zh-CN")}
+      </time>
+      <h1>{post.data.title}</h1>
+      {post.data.tags.length > 0 && (
+        <ul class="tags" aria-label="文章标签">
+          {post.data.tags.map((tag) => <li>{tag}</li>)}
+        </ul>
+      )}
+      <hr />
+    </header>
+    <div class="prose"><Content /></div>
+  </article>
+</BaseLayout>
+
+<style>
+  .back { display: inline-block; margin-bottom: 2rem; }
+  .post-header { padding: 1rem 0; text-align: center; }
+  h1 { margin: .35rem 0 .5rem; line-height: 1.2; }
+  time { color: #64748b; font-size: .9rem; }
+  article :global(a) { color: #2563eb; }
+  .tags { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; padding: 0; list-style: none; }
+  .tags li { padding: .1rem .55rem; color: #1e40af; background: #dbeafe; border-radius: 999px; font-size: .8rem; }
+  hr { max-width: 140px; margin: 1.5rem auto 0; border: 0; border-top: 2px solid #bfdbfe; }
+  .prose { max-width: 720px; margin: 0 auto; }
+</style>
