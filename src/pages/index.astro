@@ -9,65 +9,57 @@ const posts = (await getCollection("blog")).sort(
 
 <BaseLayout title="我的博客">
   <section class="hero" aria-labelledby="page-title">
-    <div class="hero-orbits" aria-hidden="true"><i></i><i></i></div>
-    <p class="eyebrow"><span></span> 正在学习与持续构建</p>
-    <h1 id="page-title">用作品记录<br /><strong>AI 开发</strong>的学习之旅</h1>
-    <p class="intro">从一个能运行的静态博客开始，记录工具、实践和每一次新的理解。</p>
-    <a class="cta" href="#articles">阅读最新文章 <span aria-hidden="true">↓</span></a>
+    <span class="hero-watermark" aria-hidden="true">学</span>
+    <p class="eyebrow"><span></span> 学习记录 · 2026</p>
+    <h1 id="page-title">把每一次理解，<br /><em>写在边页。</em></h1>
+    <p class="intro">从搭建第一个 Astro 博客开始，慢慢记录 AI 开发中的工具、实践和新的理解。</p>
+    <ul class="facts" aria-label="博客统计">
+      <li><b>{posts.length}</b> 篇记录</li>
+      <li><b>Astro</b> 构建</li>
+      <li><b>持续</b> 学习中</li>
+    </ul>
   </section>
 
   <section id="articles" aria-labelledby="articles-title">
-    <p class="section-label" data-reveal>WRITING / 学习记录</p>
-    <h2 id="articles-title" data-reveal>最新文章</h2>
+    <div class="section-heading" data-reveal><p class="section-label">近稿</p><h2 id="articles-title">最近写下的东西</h2></div>
     {posts.map((post, index) => (
       <article class="post-card" data-reveal style={`--delay: ${index * 110}ms`}>
-        <time datetime={post.data.pubDate.toISOString()}>
-          {post.data.pubDate.toLocaleDateString("zh-CN")}
-        </time>
-        <h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
-        <p>{post.data.description}</p>
-        {post.data.tags.length > 0 && (
-          <ul class="tags" aria-label="文章标签">
-            {post.data.tags.map((tag) => <li>{tag}</li>)}
-          </ul>
-        )}
-        <a class="read-more" href={`/blog/${post.id}/`}>阅读文章 <span aria-hidden="true">→</span></a>
+        <div class="post-meta"><span>№ {String(index + 1).padStart(2, "0")}</span><time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString("zh-CN")}</time></div>
+        <div class="post-body"><h3><a href={`/blog/${post.id}/`}>{post.data.title}</a></h3><p>{post.data.description}</p>{post.data.tags.length > 0 && (<ul class="tags" aria-label="文章标签">{post.data.tags.map((tag) => <li>{tag}</li>)}</ul>)}</div>
+        <a class="read-more" aria-label={`阅读：${post.data.title}`} href={`/blog/${post.id}/`}><span aria-hidden="true">→</span></a>
       </article>
     ))}
   </section>
 </BaseLayout>
 
 <style>
-  .hero { position: relative; max-width: 790px; padding: 4rem 0 6rem; overflow: hidden; }
-  .hero-orbits { position: absolute; z-index: -1; top: 50%; right: -5rem; width: 22rem; height: 22rem; transform: translateY(-50%); }
-  .hero-orbits i { position: absolute; border: 1px solid rgba(103, 232, 249, .18); border-radius: 50%; animation: orbit 12s linear infinite; }
-  .hero-orbits i:first-child { inset: 1rem; border-top-color: rgba(165, 180, 252, .9); }
-  .hero-orbits i:last-child { inset: 4rem; border-bottom-color: rgba(34, 211, 238, .8); animation-duration: 8s; animation-direction: reverse; }
-  .eyebrow, .section-label { color: #a5b4fc; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; letter-spacing: .12em; }
+  .hero { position: relative; padding: 8rem 0 7rem; overflow: hidden; }
+  .hero-watermark { position: absolute; z-index: -1; top: 1rem; right: 4%; color: rgba(70, 56, 39, .035); font-size: clamp(18rem, 38vw, 34rem); line-height: .8; user-select: none; }
+  .eyebrow, .section-label { color: #b34b35; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .74rem; letter-spacing: .13em; }
   .eyebrow { display: flex; align-items: center; gap: .55rem; }
-  .eyebrow span { width: .55rem; height: .55rem; border-radius: 50%; background: #22d3ee; box-shadow: 0 0 18px #22d3ee; }
-  h1 { margin: 1rem 0 1.5rem; color: #f8fafc; font-size: clamp(2.8rem, 8vw, 5.7rem); letter-spacing: -.07em; line-height: 1.03; }
-  h1 strong { background: linear-gradient(100deg, #a5b4fc, #67e8f9, #a5b4fc); background-size: 200% auto; background-clip: text; -webkit-background-clip: text; color: transparent; font-weight: 800; animation: shimmer 6s linear infinite; }
-  .intro { max-width: 600px; color: #94a3b8; font-size: 1.12rem; }
-  .cta { display: inline-flex; gap: .65rem; margin-top: 1.25rem; padding: .68rem 1rem; border: 1px solid rgba(103, 232, 249, .22); border-radius: .6rem; color: #cffafe; background: rgba(6, 182, 212, .08); text-decoration: none; transition: transform .2s, background .2s; }
-  .cta:hover { background: rgba(6, 182, 212, .16); transform: translateY(-2px); }
+  .eyebrow span { width: 2rem; height: 1px; background: #b34b35; }
+  h1 { max-width: 1000px; margin: 1.3rem 0 1.7rem; color: #28241f; font-size: clamp(3.1rem, 8.2vw, 7rem); font-weight: 600; letter-spacing: -.08em; line-height: 1.02; }
+  h1 em { color: #b34b35; font-weight: 500; }
+  .intro { max-width: 590px; color: #61584e; font-size: 1.12rem; }
+  .facts { display: flex; flex-wrap: wrap; gap: 1.3rem; margin: 2.8rem 0 0; padding: 0; color: #817568; list-style: none; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .73rem; letter-spacing: .08em; }
+  .facts li::before { margin-right: 1.3rem; color: #b34b35; content: "·"; }
+  .facts li:first-child::before { display: none; }
+  .facts b { color: #51463a; font-weight: 600; }
   #articles { scroll-margin-top: 6rem; }
-  h2 { margin: .2rem 0 1.5rem; color: #f8fafc; font-size: clamp(1.65rem, 4vw, 2.3rem); letter-spacing: -.04em; }
-  .post-card { position: relative; margin-bottom: 1rem; padding: 1.65rem; overflow: hidden; border: 1px solid rgba(255, 255, 255, .08); border-radius: 1rem; background: rgba(18, 18, 26, .78); box-shadow: 0 14px 38px rgba(0, 0, 0, .16); transition: border-color .2s, transform .2s; }
-  .post-card:hover { border-color: rgba(103, 232, 249, .32); transform: translateY(-3px); }
-  .post-card::before { position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(#818cf8, #22d3ee); content: ""; }
-  .post-card h2 { margin: .25rem 0 .45rem; font-size: 1.32rem; }
-  .post-card h2 a { color: #f1f5f9; text-decoration: none; }
-  .post-card h2 a:hover { color: #a5f3fc; }
-  .post-card p { max-width: 720px; margin: 0 0 1rem; color: #94a3b8; }
-  time { color: #94a3b8; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; }
+  .section-heading { display: flex; align-items: baseline; gap: 1.3rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(65, 50, 34, .18); }
+  h2 { margin: 0; color: #3b342d; font-size: 1.05rem; font-weight: 600; letter-spacing: .02em; }
+  .post-card { display: grid; grid-template-columns: 9rem minmax(0, 1fr) 2rem; gap: 2rem; align-items: center; padding: 2.5rem 0; border-bottom: 1px solid rgba(65, 50, 34, .14); }
+  .post-meta { display: grid; gap: .45rem; color: #93877a; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .73rem; letter-spacing: .06em; }
+  .post-meta span { color: #b34b35; }
+  .post-card h3 { margin: 0 0 .35rem; color: #28241f; font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 600; letter-spacing: -.04em; line-height: 1.35; }
+  .post-card h3 a { text-decoration: none; background: linear-gradient(#b34b35, #b34b35) 0 100% / 0 1px no-repeat; transition: background-size .35s; }
+  .post-card h3 a:hover { background-size: 100% 1px; }
+  .post-card p { max-width: 680px; margin: 0 0 .8rem; color: #70665b; }
+  time { color: inherit; font: inherit; }
   .tags { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; list-style: none; }
-  .tags li { padding: .14rem .58rem; color: #c4b5fd; border: 1px solid rgba(129, 140, 248, .22); border-radius: 999px; background: rgba(99, 102, 241, .1); font-size: .76rem; }
-  .read-more { color: #67e8f9; font-size: .9rem; font-weight: 650; text-decoration: none; }
-  .read-more span { display: inline-block; transition: transform .2s; }
-  .read-more:hover span { transform: translateX(4px); }
-  @keyframes orbit { to { transform: rotate(360deg); } }
-  @keyframes shimmer { to { background-position: 200% center; } }
-  @media (prefers-reduced-motion: reduce) { .hero-orbits i, h1 strong { animation: none; } }
-  @media (max-width: 640px) { .hero { padding: 2.5rem 0 4rem; } .post-card { padding: 1.35rem; } }
+  .tags li { color: #9d5a49; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .68rem; letter-spacing: .04em; }
+  .read-more { color: #8e8172; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.5rem; text-align: right; text-decoration: none; }
+  .read-more span { display: inline-block; transition: color .2s, transform .25s; }
+  .post-card:hover .read-more span { color: #b34b35; transform: translateX(7px); }
+  @media (max-width: 680px) { .hero { padding: 5rem 0 4rem; } .facts { gap: .8rem; } .facts li::before { margin-right: .8rem; } .post-card { grid-template-columns: 1fr 1.5rem; gap: .8rem; padding: 1.8rem 0; } .post-meta { grid-column: 1 / -1; display: flex; gap: 1rem; } .post-body { grid-column: 1; } .read-more { grid-column: 2; grid-row: 2; } }
 </style>

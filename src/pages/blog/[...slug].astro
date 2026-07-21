@@ -34,13 +34,17 @@ const { Content } = await render(post);
 </BaseLayout>
 
 <style>
-  .back { display: inline-block; margin-bottom: 2rem; }
+  .back { display: inline-block; margin-bottom: 3rem; color: #817568; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; letter-spacing: .08em; text-decoration: none; }
   .post-header { padding: 1rem 0; text-align: center; }
-  h1 { margin: .35rem 0 .5rem; line-height: 1.2; }
-  time { color: #64748b; font-size: .9rem; }
-  article :global(a) { color: #2563eb; }
+  h1 { max-width: 900px; margin: .6rem auto 1rem; color: #28241f; font-size: clamp(2.5rem, 6vw, 4.6rem); font-weight: 600; letter-spacing: -.06em; line-height: 1.18; }
+  time { color: #887c6f; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; letter-spacing: .06em; }
+  article :global(a) { color: #a8402a; }
   .tags { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; padding: 0; list-style: none; }
-  .tags li { padding: .1rem .55rem; color: #1e40af; background: #dbeafe; border-radius: 999px; font-size: .8rem; }
-  hr { max-width: 140px; margin: 1.5rem auto 0; border: 0; border-top: 2px solid #bfdbfe; }
-  .prose { max-width: 720px; margin: 0 auto; }
+  .tags li { color: #a8402a; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .68rem; letter-spacing: .06em; }
+  hr { max-width: 86px; margin: 1.7rem auto 0; border: 0; border-top: 1px solid #b34b35; }
+  .prose { max-width: 760px; margin: 0 auto; color: #494139; font-size: 1.08rem; }
+  .prose :global(h2) { margin-top: 2.6em; color: #28241f; font-size: 1.55em; font-weight: 600; }
+  .prose :global(h3) { margin-top: 2em; color: #28241f; }
+  .prose :global(li::marker) { color: #b34b35; }
+  .prose :global(pre) { overflow-x: auto; padding: 1rem 1.2rem; border-left: 2px solid #b34b35; background: rgba(91, 67, 40, .06); }
 </style>
