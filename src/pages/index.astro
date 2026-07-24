@@ -10,10 +10,11 @@ const posts = (await getCollection("blog")).sort(
 <BaseLayout title="我的博客">
   <section class="hero" aria-labelledby="page-title">
     <span class="hero-watermark" aria-hidden="true">学</span>
-    <p class="eyebrow"><span></span> 学习记录 · 2026</p>
-    <h1 id="page-title">把每一次理解，<br /><em>写在边页。</em></h1>
-    <p class="intro">从搭建第一个 Astro 博客开始，慢慢记录 AI 开发中的工具、实践和新的理解。</p>
-    <ul class="facts" aria-label="博客统计">
+    <p class="eyebrow" data-reveal><span></span> 学习记录 · 2026</p>
+    <h1 id="page-title" data-reveal style="--delay: 80ms">把每一次理解，<br /><em>写在边页。</em></h1>
+    <p class="intro" data-reveal style="--delay: 150ms">从搭建第一个 Astro 博客开始，慢慢记录 AI 开发中的工具、实践和新的理解。</p>
+    <a class="archive-link" data-reveal style="--delay: 220ms" href="#articles">翻到最近的记录 <span aria-hidden="true">↓</span></a>
+    <ul class="facts" data-reveal style="--delay: 290ms" aria-label="博客统计">
       <li><b>{posts.length}</b> 篇记录</li>
       <li><b>Astro</b> 构建</li>
       <li><b>持续</b> 学习中</li>
@@ -33,15 +34,17 @@ const posts = (await getCollection("blog")).sort(
 </BaseLayout>
 
 <style>
-  .hero { position: relative; padding: 8rem 0 7rem; overflow: hidden; }
+  .hero { position: relative; padding: clamp(5rem, 12vw, 8rem) 0 clamp(4.5rem, 10vw, 7rem); overflow: hidden; }
   .hero-watermark { position: absolute; z-index: -1; top: 1rem; right: 4%; color: rgba(70, 56, 39, .035); font-size: clamp(18rem, 38vw, 34rem); line-height: .8; user-select: none; }
   .eyebrow, .section-label { color: #b34b35; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .74rem; letter-spacing: .13em; }
   .eyebrow { display: flex; align-items: center; gap: .55rem; }
   .eyebrow span { width: 2rem; height: 1px; background: #b34b35; }
   h1 { max-width: 1000px; margin: 1.3rem 0 1.7rem; color: #28241f; font-size: clamp(3.1rem, 8.2vw, 7rem); font-weight: 600; letter-spacing: -.08em; line-height: 1.02; }
   h1 em { color: #b34b35; font-weight: 500; }
-  .intro { max-width: 590px; color: #61584e; font-size: 1.12rem; }
-  .facts { display: flex; flex-wrap: wrap; gap: 1.3rem; margin: 2.8rem 0 0; padding: 0; color: #817568; list-style: none; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .73rem; letter-spacing: .08em; }
+  .intro { max-width: 590px; color: var(--ink-soft); font-size: 1.12rem; }
+  .archive-link { display: inline-flex; align-items: center; gap: .65rem; margin-top: 1.4rem; padding-bottom: .18rem; color: var(--ink); border-bottom: 1px solid currentColor; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; letter-spacing: .08em; text-decoration: none; transition: color .2s ease, gap .2s ease; }
+  .archive-link:hover { gap: .9rem; color: #8f3d2d; }
+  .facts { display: flex; flex-wrap: wrap; gap: 1.3rem; margin: 2.8rem 0 0; padding: 0; color: var(--ink-muted); list-style: none; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; letter-spacing: .07em; }
   .facts li::before { margin-right: 1.3rem; color: #b34b35; content: "·"; }
   .facts li:first-child::before { display: none; }
   .facts b { color: #51463a; font-weight: 600; }
@@ -52,14 +55,14 @@ const posts = (await getCollection("blog")).sort(
   .post-meta { display: grid; gap: .45rem; color: #93877a; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .73rem; letter-spacing: .06em; }
   .post-meta span { color: #b34b35; }
   .post-card h3 { margin: 0 0 .35rem; color: #28241f; font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 600; letter-spacing: -.04em; line-height: 1.35; }
-  .post-card h3 a { text-decoration: none; background: linear-gradient(#b34b35, #b34b35) 0 100% / 0 1px no-repeat; transition: background-size .35s; }
+  .post-card h3 a { text-decoration: none; background: linear-gradient(var(--vermilion), var(--vermilion)) 0 100% / 0 1px no-repeat; transition: background-size .25s ease; }
   .post-card h3 a:hover { background-size: 100% 1px; }
   .post-card p { max-width: 680px; margin: 0 0 .8rem; color: #70665b; }
   time { color: inherit; font: inherit; }
   .tags { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; list-style: none; }
   .tags li { color: #9d5a49; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .68rem; letter-spacing: .04em; }
-  .read-more { color: #8e8172; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.5rem; text-align: right; text-decoration: none; }
+  .read-more { display: grid; width: 44px; height: 44px; place-items: center; color: #8e8172; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.5rem; text-align: right; text-decoration: none; }
   .read-more span { display: inline-block; transition: color .2s, transform .25s; }
   .post-card:hover .read-more span { color: #b34b35; transform: translateX(7px); }
-  @media (max-width: 680px) { .hero { padding: 5rem 0 4rem; } .facts { gap: .8rem; } .facts li::before { margin-right: .8rem; } .post-card { grid-template-columns: 1fr 1.5rem; gap: .8rem; padding: 1.8rem 0; } .post-meta { grid-column: 1 / -1; display: flex; gap: 1rem; } .post-body { grid-column: 1; } .read-more { grid-column: 2; grid-row: 2; } }
+  @media (max-width: 680px) { .hero { padding: 5rem 0 4rem; } .facts { gap: .8rem; } .facts li::before { margin-right: .8rem; } .post-card { grid-template-columns: minmax(0, 1fr) 44px; gap: .8rem; padding: 1.8rem 0; } .post-meta { grid-column: 1 / -1; display: flex; gap: 1rem; } .post-body { grid-column: 1; } .read-more { grid-column: 2; grid-row: 2; } }
 </style>

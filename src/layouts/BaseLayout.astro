@@ -15,15 +15,16 @@ const { title, description = "一个使用 Astro 构建的静态博客" } = Astr
     <meta name="description" content={description} />
     <title>{title}</title>
   </head>
-  <body>
+<body>
     <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <a class="skip-link" href="#content">跳到正文</a>
     <header>
       <nav aria-label="主导航">
         <a class="brand" href="/"><span class="brand-mark">记</span><span>AI 学习手记</span></a>
         <a class="nav-link" href="/#articles">文章</a>
       </nav>
     </header>
-    <main><slot /></main>
+    <main id="content"><slot /></main>
     <footer>记录学习的边页 · 2026</footer>
     <script>
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -51,26 +52,42 @@ const { title, description = "一个使用 Astro 构建的静态博客" } = Astr
 </html>
 
 <style is:global>
-  :root { color: #28241f; background: #f5f1e9; font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, serif; }
+  :root {
+    --paper: #f5f1e9;
+    --paper-deep: #e8dfd0;
+    --ink: #28241f;
+    --ink-soft: #61584e;
+    --ink-muted: #817568;
+    --line: rgba(65, 50, 34, .16);
+    --vermilion: #b34b35;
+    --measure: 43rem;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, serif;
+  }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { min-width: 320px; margin: 0; line-height: 1.8; background-color: #f5f1e9; background-image: radial-gradient(rgba(77, 60, 40, .055) .6px, transparent .7px), radial-gradient(rgba(77, 60, 40, .035) .6px, transparent .7px); background-position: 0 0, 7px 9px; background-size: 15px 15px; }
+  body { min-width: 320px; margin: 0; line-height: 1.8; background-color: var(--paper); background-image: radial-gradient(rgba(77, 60, 40, .055) .6px, transparent .7px), radial-gradient(rgba(77, 60, 40, .035) .6px, transparent .7px); background-position: 0 0, 7px 9px; background-size: 15px 15px; }
   .scroll-progress { position: fixed; z-index: 20; top: 0; left: 0; width: 100%; height: 2px; background: rgba(78, 56, 35, .08); }
-  .scroll-progress span { display: block; width: 100%; height: 100%; background: #b34b35; transform: scaleX(0); transform-origin: left; }
-  header { position: sticky; z-index: 10; top: 0; background: rgba(245, 241, 233, .88); backdrop-filter: blur(14px); }
+  .scroll-progress span { display: block; width: 100%; height: 100%; background: var(--vermilion); transform: scaleX(0); transform-origin: left; }
+  .skip-link { position: fixed; z-index: 30; top: .75rem; left: .75rem; padding: .5rem .8rem; color: #fffaf2; background: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; text-decoration: none; transform: translateY(-180%); transition: transform .18s ease-out; }
+  .skip-link:focus { transform: translateY(0); }
+  header { position: sticky; z-index: 10; top: 0; background: color-mix(in srgb, var(--paper) 94%, transparent); border-bottom: 1px solid transparent; }
   nav, main, footer { width: min(1200px, calc(100% - 2rem)); margin: 0 auto; }
-  nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(65, 50, 34, .14); }
+  nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
   a { color: inherit; }
-  .brand { display: inline-flex; align-items: center; gap: .7rem; color: #28241f; font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; text-decoration: none; }
-  .brand-mark { display: grid; width: 1.8rem; height: 1.8rem; place-items: center; border-radius: .34rem; color: #fffaf2; background: #b34b35; font-size: .85rem; font-family: ui-sans-serif, system-ui, sans-serif; box-shadow: 0 4px 10px rgba(151, 59, 38, .18); }
-  .nav-link { position: relative; color: #5b5146; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; letter-spacing: .15em; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--vermilion); outline-offset: 4px; }
+  .brand { display: inline-flex; align-items: center; gap: .7rem; min-height: 44px; color: var(--ink); font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; text-decoration: none; }
+  .brand-mark { display: grid; width: 1.8rem; height: 1.8rem; place-items: center; border-radius: .34rem; color: #fffaf2; background: var(--vermilion); font-size: .85rem; font-family: ui-sans-serif, system-ui, sans-serif; box-shadow: 0 3px 6px rgba(151, 59, 38, .16); }
+  .nav-link { position: relative; display: grid; min-width: 44px; min-height: 44px; place-items: center; color: #5b5146; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; letter-spacing: .15em; text-decoration: none; }
   .nav-link::after { position: absolute; bottom: -.7rem; left: 50%; width: 4px; height: 4px; border-radius: 50%; background: #b34b35; content: ""; transform: translateX(-50%) scale(0); transition: transform .2s; }
   .nav-link:hover::after { transform: translateX(-50%) scale(1); }
   main { padding: 2.5rem 0 5rem; }
-  footer { padding: 2rem 0 3rem; color: #817568; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .72rem; letter-spacing: .1em; border-top: 1px solid rgba(65, 50, 34, .14); }
+  footer { padding: 2rem 0 3rem; color: var(--ink-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .76rem; letter-spacing: .08em; border-top: 1px solid var(--line); }
   :not(pre) > code { padding: .12em .4em; border-radius: .25em; color: #a8402a; background: rgba(179, 75, 53, .08); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; }
-  ::selection { color: #fffaf2; background: #b34b35; }
-  .motion-ready [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .6s ease var(--delay, 0ms), transform .6s cubic-bezier(.2, .8, .2, 1) var(--delay, 0ms); }
+  ::selection { color: #fffaf2; background: var(--vermilion); }
+  .motion-ready [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity .42s cubic-bezier(.22, .61, .36, 1) var(--delay, 0ms), transform .42s cubic-bezier(.22, .61, .36, 1) var(--delay, 0ms); }
   .motion-ready [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 680px) { nav, main, footer { width: min(100% - 1.5rem, 1200px); } nav { min-height: 70px; } .brand { font-size: .98rem; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .scroll-progress { display: none; } }
 </style>
