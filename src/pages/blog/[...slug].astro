@@ -34,10 +34,23 @@ const base = `${import.meta.env.BASE_URL}/`;
   </article>
 </BaseLayout>
 
+<script>
+  const postHeader = document.querySelector<HTMLElement>(".post-header");
+  let previousScrollY = window.scrollY;
+
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+    const isReadingDown = currentScrollY > 48 && currentScrollY > previousScrollY;
+    postHeader?.classList.toggle("is-hidden", isReadingDown);
+    previousScrollY = currentScrollY;
+  }, { passive: true });
+</script>
+
 <style>
   .back { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 1.25rem; color: var(--ink-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; letter-spacing: .08em; text-decoration: none; transition: color .2s ease, transform .2s ease; }
   .back:hover { color: var(--vermilion); transform: translateX(-3px); }
-  .post-header { padding: .25rem 0; text-align: center; }
+  .post-header { padding: .25rem 0; text-align: center; transition: opacity .18s ease, transform .18s ease; }
+  .post-header.is-hidden { opacity: 0; pointer-events: none; transform: translateY(-.75rem); }
   h1 { max-width: 900px; margin: .45rem auto .8rem; color: #28241f; font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 600; letter-spacing: -.04em; line-height: 1.25; }
   time { color: #887c6f; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; letter-spacing: .06em; }
   article :global(a) { color: #a8402a; }
