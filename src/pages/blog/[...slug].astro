@@ -13,6 +13,11 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const base = `${import.meta.env.BASE_URL}/`;
+const directoryPosts = post.id === "hello-world"
+  ? (await getCollection("blog"))
+      .filter((candidate) => candidate.id !== post.id)
+      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  : [];
 ---
 
 <BaseLayout title={`${post.data.title} | 我的博客`} description={post.data.description}>
@@ -31,6 +36,20 @@ const base = `${import.meta.env.BASE_URL}/`;
       <hr />
     </header>
     <div class="prose" data-reveal style="--delay: 100ms"><Content /></div>
+    {post.id === "hello-world" && (
+      <section class="blog-directory" aria-labelledby="directory-title">
+        <p class="directory-label">自动更新</p>
+        <h2 id="directory-title">文章目录</h2>
+        <ul>
+          {directoryPosts.map((entry) => (
+            <li>
+              <a href={`${base}blog/${entry.id}/`}>{entry.data.title}</a>
+              <p>{entry.data.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
   </article>
 </BaseLayout>
 
@@ -67,4 +86,12 @@ const base = `${import.meta.env.BASE_URL}/`;
   .prose :global(.project-shot) { margin: 2rem 0; }
   .prose :global(.project-shot img) { display: block; width: 100%; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: .35rem; box-shadow: 0 14px 32px rgba(65, 50, 34, .1); }
   .prose :global(.project-shot figcaption) { margin-top: .7rem; color: var(--ink-muted); font-size: .84em; line-height: 1.55; }
+  .blog-directory { max-width: var(--measure); margin: 3rem auto 0; padding-top: 1.8rem; border-top: 1px solid var(--line); }
+  .directory-label { margin: 0 0 .25rem; color: var(--vermilion); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .7rem; letter-spacing: .1em; }
+  .blog-directory h2 { margin: 0 0 1rem; color: #28241f; font-size: 1.45rem; }
+  .blog-directory ul { margin: 0; padding: 0; list-style: none; }
+  .blog-directory li { padding: 1rem 0; border-top: 1px solid rgba(65, 50, 34, .14); }
+  .blog-directory li:last-child { border-bottom: 1px solid rgba(65, 50, 34, .14); }
+  .blog-directory a { color: #a8402a; font-weight: 600; text-underline-offset: .18em; }
+  .blog-directory p { margin: .25rem 0 0; color: var(--ink-soft); font-size: .94rem; }
 </style>

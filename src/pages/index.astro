@@ -2,9 +2,12 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const pinnedPostId = "hello-world";
+const posts = (await getCollection("blog")).sort((a, b) => {
+  if (a.id === pinnedPostId) return -1;
+  if (b.id === pinnedPostId) return 1;
+  return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+});
 const base = `${import.meta.env.BASE_URL}/`;
 ---
 
@@ -26,7 +29,7 @@ const base = `${import.meta.env.BASE_URL}/`;
     <div class="section-heading" data-reveal><p class="section-label">近稿</p><h2 id="articles-title">最近写下的东西</h2></div>
     {posts.map((post, index) => (
       <article class="post-card" data-reveal style={`--delay: ${index * 110}ms`}>
-        <div class="post-meta"><span>№ {String(index + 1).padStart(2, "0")}</span><time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString("zh-CN")}</time></div>
+        <div class="post-meta"><span>{post.id === pinnedPostId ? "置顶 · " : ""}№ {String(index + 1).padStart(2, "0")}</span><time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString("zh-CN")}</time></div>
         <div class="post-body"><h3><a href={`${base}blog/${post.id}/`}>{post.data.title}</a></h3><p>{post.data.description}</p>{post.data.tags.length > 0 && (<ul class="tags" aria-label="文章标签">{post.data.tags.map((tag) => <li>{tag}</li>)}</ul>)}</div>
         <a class="read-more" aria-label={`阅读：${post.data.title}`} href={`${base}blog/${post.id}/`}><span aria-hidden="true">→</span></a>
       </article>
