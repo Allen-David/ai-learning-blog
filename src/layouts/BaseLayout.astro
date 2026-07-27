@@ -22,7 +22,12 @@ const base = `${import.meta.env.BASE_URL}/`;
     <header>
       <nav aria-label="主导航">
         <a class="brand" href={base}><span class="brand-mark">记</span><span>AI 学习手记</span></a>
-        <a class="nav-link" href={`${base}#articles`}>文章</a>
+        <div class="nav-links">
+          <a class="nav-link" href={base}>首页</a>
+          <a class="nav-link" href={`${base}#articles`}>文章</a>
+          <a class="nav-link" href={`${base}blog/about-me/`}>关于</a>
+          <a class="nav-link" href="https://github.com/Allen-David/ai-learning-blog" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
       </nav>
     </header>
     <main id="content"><slot /></main>
@@ -80,7 +85,8 @@ const base = `${import.meta.env.BASE_URL}/`;
   a:focus-visible { outline: 2px solid var(--vermilion); outline-offset: 4px; }
   .brand { display: inline-flex; align-items: center; gap: .7rem; min-height: 44px; color: var(--ink); font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; text-decoration: none; }
   .brand-mark { display: grid; width: 1.8rem; height: 1.8rem; place-items: center; border-radius: .34rem; color: #fffaf2; background: var(--vermilion); font-size: .85rem; font-family: ui-sans-serif, system-ui, sans-serif; box-shadow: 0 3px 6px rgba(151, 59, 38, .16); }
-  .nav-link { position: relative; display: grid; min-width: 44px; min-height: 44px; place-items: center; color: #5b5146; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; letter-spacing: .15em; text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: .35rem; }
+  .nav-link { position: relative; display: grid; min-width: 44px; min-height: 44px; padding: 0 .45rem; place-items: center; color: #5b5146; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .74rem; letter-spacing: .09em; text-decoration: none; }
   .nav-link::after { position: absolute; bottom: -.7rem; left: 50%; width: 4px; height: 4px; border-radius: 50%; background: #b34b35; content: ""; transform: translateX(-50%) scale(0); transition: transform .2s; }
   .nav-link:hover::after { transform: translateX(-50%) scale(1); }
   main { padding: 2.5rem 0 5rem; }
@@ -89,6 +95,6 @@ const base = `${import.meta.env.BASE_URL}/`;
   ::selection { color: #fffaf2; background: var(--vermilion); }
   .motion-ready [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity .42s cubic-bezier(.22, .61, .36, 1) var(--delay, 0ms), transform .42s cubic-bezier(.22, .61, .36, 1) var(--delay, 0ms); }
   .motion-ready [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
-  @media (max-width: 680px) { nav, main, footer { width: min(100% - 1.5rem, 1200px); } nav { min-height: 70px; } .brand { font-size: .98rem; } }
+  @media (max-width: 680px) { nav, main, footer { width: min(100% - 1.5rem, 1200px); } nav { min-height: 70px; } .brand { font-size: .98rem; } .brand > span:last-child { display: none; } .nav-links { gap: 0; } .nav-link { padding: 0 .28rem; font-size: .7rem; letter-spacing: .04em; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .scroll-progress { display: none; } }
 </style>
