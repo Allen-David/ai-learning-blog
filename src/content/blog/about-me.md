@@ -14,12 +14,12 @@ tags:
 ## 🎥 两分钟认识我
 
 <video controls playsinline preload="metadata" poster="/ai-learning-blog/images/about/video/avatar-intro-explain.png" width="100%" style="display: block; border-radius: 14px; box-shadow: 0 18px 45px rgba(20, 28, 46, 0.2); background: #111827;">
-  <source src="/ai-learning-blog/images/about/about-avatar-intro-v2.mp4" type="video/mp4" />
-  <track kind="captions" srclang="zh-CN" label="中文字幕" src="/ai-learning-blog/images/about/about-avatar-intro-v2.vtt" default />
-  你的浏览器暂不支持视频播放，可直接下载 <a href="/ai-learning-blog/images/about/about-avatar-intro-v2.mp4">这段数字人自我介绍</a>。
+  <source src="/ai-learning-blog/images/about/about-avatar-intro-v3.mp4" type="video/mp4" />
+  <track kind="captions" srclang="zh-CN" label="中文字幕" src="/ai-learning-blog/images/about/about-avatar-intro-v3.vtt" default />
+  你的浏览器暂不支持视频播放，可直接下载 <a href="/ai-learning-blog/images/about/about-avatar-intro-v3.mp4">这段数字人自我介绍</a>。
 </video>
 
-*由虚拟形象出镜：一段关于学习、实践、运动与持续构建的自我介绍。*
+*由虚拟形象串场：一段关于学习、实践、运动与持续构建的两分钟自我介绍。*
 
 ## 👋 关于我
 
