@@ -101,6 +101,31 @@ tags:
 - **个人赛事**：参加过蓝桥杯和全国大学生数学竞赛，均获得省级奖项。它们让我持续练习在有限时间内拆解问题、保持耐心，并把解题过程写得更清楚。
 - **团队赛事**：参与大学生服务外包创新创业大赛，团队获得国家级奖项。对我来说，这段经历的收获不只是一份结果，更是理解分工协作、方案表达和项目落地的一次实践。
 
+## 🏃 运动，也是一种长期主义
+
+写代码和训练看起来相距很远，但它们都需要把注意力放在当下的一步。参加学校运动会和越野赛时，我更能体会到：节奏、耐心和持续投入，往往比一开始冲得多快更重要。
+
+<div class="sports-gallery">
+  <figure class="wide">
+    <img src="/ai-learning-blog/images/about/sports/sports-group-college.jpg" alt="山东科技大学计算机科学与工程学院运动队在校门前的合影" loading="lazy" />
+    <figcaption>学校运动会出发前，与计算机科学与工程学院同学的合影。</figcaption>
+  </figure>
+  <figure>
+    <img src="/ai-learning-blog/images/about/sports/cross-country-running.jpg" alt="越野赛中正在跑步的徐恺晨" loading="lazy" />
+    <figcaption>越野赛途中：先找到自己的呼吸，再找到自己的节奏。</figcaption>
+  </figure>
+  <figure>
+    <img src="/ai-learning-blog/images/about/sports/cross-country-finish.jpg" alt="越野赛接近终点时的徐恺晨" loading="lazy" />
+    <figcaption>接近终点时，仍然把每一步跑稳。</figcaption>
+  </figure>
+  <figure class="wide">
+    <img src="/ai-learning-blog/images/about/sports/sports-group-team.jpg" alt="参加学校运动会的同学在教学楼前合影" loading="lazy" />
+    <figcaption>运动会之后的集体留影。一起出发、一起完成，也是很珍贵的经历。</figcaption>
+  </figure>
+</div>
+
+这种经历也会反过来影响我的学习方式：不把某一次卡住当成停下的理由，先做一点、记录一点，再从反馈里调整下一步。
+
 ## 🌍 好奇心也在技术之外
 
 我喜欢探索还不了解的东西。除了课程和项目，我也会浏览不同地区的产品、技术社区与公共讨论：Instagram、X、WhatsApp、Telegram、Facebook、Discord 等平台对我更像观察窗口——标准的“互联网深海潜水员”，只阅读内容、只做观察、不抢麦发言。
