@@ -13,12 +13,13 @@ tags:
 
 ## 🎥 两分钟认识我
 
-<video controls preload="metadata" poster="/ai-learning-blog/images/about/avatar-intro-wave.png" width="100%" style="display: block; border-radius: 14px; box-shadow: 0 18px 45px rgba(20, 28, 46, 0.2); background: #111827;">
-  <source src="/ai-learning-blog/images/about/about-avatar-intro.mp4" type="video/mp4" />
-  你的浏览器暂不支持视频播放，可直接下载 <a href="/ai-learning-blog/images/about/about-avatar-intro.mp4">这段数字人自我介绍</a>。
+<video controls playsinline preload="metadata" poster="/ai-learning-blog/images/about/video/avatar-intro-explain.png" width="100%" style="display: block; border-radius: 14px; box-shadow: 0 18px 45px rgba(20, 28, 46, 0.2); background: #111827;">
+  <source src="/ai-learning-blog/images/about/about-avatar-intro-v2.mp4" type="video/mp4" />
+  <track kind="captions" srclang="zh-CN" label="中文字幕" src="/ai-learning-blog/images/about/about-avatar-intro-v2.vtt" default />
+  你的浏览器暂不支持视频播放，可直接下载 <a href="/ai-learning-blog/images/about/about-avatar-intro-v2.mp4">这段数字人自我介绍</a>。
 </video>
 
-*由极客风虚拟形象出镜：有一点手势、有一点表情，剩下的是我对 AI 的好奇心。*
+*由虚拟形象出镜：一段关于学习、实践、运动与持续构建的自我介绍。*
 
 ## 👋 关于我
 
@@ -106,10 +107,6 @@ tags:
 写代码和训练看起来相距很远，但它们都需要把注意力放在当下的一步。参加学校运动会和越野赛时，我更能体会到：节奏、耐心和持续投入，往往比一开始冲得多快更重要。
 
 <div class="sports-gallery">
-  <figure class="wide">
-    <img src="/ai-learning-blog/images/about/sports/sports-group-college.jpg" alt="计算机科学与工程学院同学参加院级越野赛后的合影" loading="lazy" />
-    <figcaption>院级越野赛结束后，与计算机科学与工程学院同学的合影。</figcaption>
-  </figure>
   <figure>
     <img src="/ai-learning-blog/images/about/sports/cross-country-running.jpg" alt="校级运动会赛道上正在跑步的徐恺晨" loading="lazy" />
     <figcaption>校级运动会途中：先找到自己的呼吸，再找到自己的节奏。</figcaption>
@@ -117,10 +114,6 @@ tags:
   <figure>
     <img src="/ai-learning-blog/images/about/sports/cross-country-finish.jpg" alt="校级越野赛接近终点时的徐恺晨" loading="lazy" />
     <figcaption>校级越野赛接近终点时，仍然把每一步跑稳。</figcaption>
-  </figure>
-  <figure class="wide">
-    <img src="/ai-learning-blog/images/about/sports/sports-group-team.jpg" alt="同学参加院级越野赛后的合影" loading="lazy" />
-    <figcaption>院级越野赛之后的集体留影。一起出发、一起完成，也是很珍贵的经历。</figcaption>
   </figure>
 </div>
 
